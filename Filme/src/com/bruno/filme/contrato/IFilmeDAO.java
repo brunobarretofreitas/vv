@@ -22,7 +22,7 @@ public interface IFilmeDAO {
 	 * Método responsável por remover um filme do banco de dados.
 	 * 
 	 */
-	public void remover(IFilme filme);
+	public void remover(int idFilme); //Modificado de IFilme filme para int idFilme.
 	
 	/**
 	 * Método responsável por retornar a lista de todos os filmes do banco de dados. 
