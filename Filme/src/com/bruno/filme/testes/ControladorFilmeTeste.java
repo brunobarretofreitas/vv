@@ -39,6 +39,8 @@ public class ControladorFilmeTeste extends TestCase{
 		
 		filmeTeste = filmes.next();
 		
+		filmeDAO.remover(filmeTeste.getId());
+		
 		
 		
 		

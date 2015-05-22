@@ -8,6 +8,7 @@ import com.bruno.filme.contrato.IFilmeController;
 import com.bruno.filme.contrato.IFilmeDAO;
 import com.bruno.filme.contrato.IPessoa;
 import com.bruno.filme.dao.FilmeDAO;
+import com.bruno.filme.iterator.FilmeIterator;
 import com.bruno.filme.modelo.Filme;
 
 public class FilmeControlador implements IFilmeController{
@@ -66,9 +67,15 @@ public class FilmeControlador implements IFilmeController{
 	}
 
 	@Override
-	public IFilme buscarFilmePorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public IFilme buscarFilmePorId(int id) throws SQLException {
+		IFilmeDAO filmeDAO = new FilmeDAO();
+		Iterator<IFilme> filmes = filmeDAO.listar();
+		
+		while(filmes.hasNext()){
+			if(filmes.next().getId() == id)
+				return filmes.next();
+		}
+		
 	}
 
 	@Override
