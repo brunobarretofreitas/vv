@@ -8,22 +8,14 @@ public interface IFilmeController {
 	public void criarFilme(String titulo, String sinopse, String genero, 
 			String anoFilmagem, String anoLancamento, String estudioFilmagem) throws SQLException;
 	
-	public void editarFilme(String titulo, String sinopse, String genero,
-			String anoFilmagem, String anoLancamento, String estudioFilmagem);
+	public void editarFilme(int id,String titulo, String sinopse, String genero,
+			String anoFilmagem, String anoLancamento, String estudioFilmagem) throws SQLException;
+		
+	public void removerFilme(int idFilme) throws SQLException;
 	
-	public void adicionarAtor(IPessoa ator);
-	
-	public void adicionarDiretor(IPessoa diretor);
-	
-	public void removerAtor(int idAtor);
-	
-	public void removerDiretor(int idDiretor);
-	
-	public void removerFilme(int idFilme);
-	
-	public IFilme buscarFilmePorId(int id);
+	public IFilme buscarFilmePorId(int id) throws SQLException;
 
-	public Iterator<IFilme> buscarFilmePorTitulo(String titulo);
+	public IFilme buscarFilmePorTitulo(String titulo) throws SQLException;
 	
 	public Iterator<IFilme> listarFilmes() throws SQLException;
 }

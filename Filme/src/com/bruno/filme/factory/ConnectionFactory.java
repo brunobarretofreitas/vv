@@ -11,6 +11,14 @@ public class ConnectionFactory {
 	private String password = "pamellahayana";
 	private String db = "vv";
 	
+	public ConnectionFactory(){
+		super();
+	}
+	
+	public ConnectionFactory(String host){
+		this.host = host;
+	}
+	
 	//carrega o driver jdbc
 	static{
 		try{

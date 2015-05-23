@@ -1,13 +1,19 @@
 package com.bruno.filme.controller;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.bruno.filme.contrato.IFilme;
 import com.bruno.filme.contrato.IFilmeController;
 import com.bruno.filme.contrato.IFilmeDAO;
 import com.bruno.filme.contrato.IPessoa;
+import com.bruno.filme.contrato.IPessoaFilmeDAO;
 import com.bruno.filme.dao.FilmeDAO;
+import com.bruno.filme.dao.PessoaFilmeDAO;
+import com.bruno.filme.factory.ConnectionFactory;
 import com.bruno.filme.iterator.FilmeIterator;
 import com.bruno.filme.modelo.Filme;
 
@@ -30,39 +36,30 @@ public class FilmeControlador implements IFilmeController{
 	}
 
 	@Override
-	public void editarFilme(String titulo, String sinopse, String genero,
-			String anoFilmagem, String anoLancamento, String estudioFilmagem) {
-		// TODO Auto-generated method stub
+	public void editarFilme(int id,String titulo, String sinopse, String genero,
+			String anoFilmagem, String anoLancamento, String estudioFilmagem) throws SQLException {
+		
+		IFilme filme = new Filme();
+		filme.setId(id);
+		filme.setTitulo(titulo);
+		filme.setSinopse(sinopse);
+		filme.setGenero(genero);
+		filme.setAnoFilmagem(anoFilmagem);
+		filme.setAnoLancamento(anoLancamento);
+		filme.setEstudioDeFilmagem(estudioFilmagem);
+		
+		IFilmeDAO filmeDAO = new FilmeDAO();
+		filmeDAO.editar(filme);
 		
 	}
-
+	
+	
+	
 	@Override
-	public void adicionarAtor(IPessoa ator) {
-		// TODO Auto-generated method stub
+	public void removerFilme(int idFilme) throws SQLException {
 		
-	}
-
-	@Override
-	public void adicionarDiretor(IPessoa diretor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removerAtor(int idAtor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removerDiretor(int idDiretor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removerFilme(int idFilme) {
-		// TODO Auto-generated method stub
+		IFilmeDAO filmeDAO = new FilmeDAO();
+		filmeDAO.remover(idFilme);
 		
 	}
 
@@ -72,15 +69,25 @@ public class FilmeControlador implements IFilmeController{
 		Iterator<IFilme> filmes = filmeDAO.listar();
 		
 		while(filmes.hasNext()){
-			if(filmes.next().getId() == id)
-				return filmes.next();
+			IFilme aux = filmes.next();
+			if(aux.getId() == id)
+				return aux;
 		}
 		
+		return null;
 	}
 
 	@Override
-	public Iterator<IFilme> buscarFilmePorTitulo(String titulo) {
-		// TODO Auto-generated method stub
+	public IFilme buscarFilmePorTitulo(String titulo) throws SQLException {
+		IFilmeDAO filmeDAO = new FilmeDAO();
+		Iterator<IFilme> filmesListados = filmeDAO.listar();
+		
+		while(filmesListados.hasNext()){
+			IFilme aux = filmesListados.next();
+			if(aux.getTitulo().equals(titulo))
+				return aux;
+		}
+		
 		return null;
 	}
 

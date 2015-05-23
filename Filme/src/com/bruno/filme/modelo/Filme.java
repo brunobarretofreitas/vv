@@ -27,7 +27,7 @@ public class Filme implements IFilme{
 	@Override
 	public int getId() {
 		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
 	@Override

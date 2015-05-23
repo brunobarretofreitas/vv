@@ -10,15 +10,18 @@ public class FilmeIterator implements Iterator<IFilme>{
 
 private List<IFilme> filmes; 
 	
+	private int iterator;
+	
 	public FilmeIterator(List<IFilme> filmes) {
 		// TODO Auto-generated constructor stub
 		this.filmes = filmes;
+		iterator = 0;
 	}
 	
 	@Override
 	public boolean hasNext() {
 		// TODO Auto-generated method stub
-		if(filmes.size() > 0)
+		if(iterator < filmes.size())
 			return true;
 		else 
 			return false;
@@ -27,13 +30,13 @@ private List<IFilme> filmes;
 	@Override
 	public IFilme next() {
 		// TODO Auto-generated method stub
-		return filmes.get(0);
+		return filmes.get(iterator++);
 	}
 
 	@Override
 	public void remove() {
 		// TODO Auto-generated method stub
-		this.filmes.remove(0);
+		this.filmes.remove(iterator);
 	}
 	
 	

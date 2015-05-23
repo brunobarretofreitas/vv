@@ -18,6 +18,10 @@ public class FilmeDAO implements IFilmeDAO{
 
 	private Connection conexao;
 	
+	public FilmeDAO(String host) throws SQLException{
+		this.conexao = new ConnectionFactory(host).getConnection();
+	}
+	
 	public FilmeDAO() throws SQLException{
 		this.conexao = new ConnectionFactory().getConnection();
 	}
@@ -53,14 +57,40 @@ public class FilmeDAO implements IFilmeDAO{
 	@Override
 	public void editar(IFilme filme) {
 		// TODO Auto-generated method stub
-		String sql = "update filme set  ";
+		int id_filme = filme.getId();
+		String titulo = filme.getTitulo();
+		String sinopse = filme.getSinopse();
+		String genero = filme.getGenero();
+		String ano_filmagem = filme.getAnoFilmagem();
+		String ano_lancamento = filme.getAnoLancamento();
+		String estudio_filmagem = filme.getEstudioDeFilmagem();
+		try {
+		
+		String sql = "update Filme set titulo = ?,sinopse = ?,genero = ?,anoFilmagem = ?,"
+				+ "anoLancamento = ?,estudioFilmagem = ? where id = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setString(1, titulo);
+		stmt.setString(2, sinopse);
+		stmt.setString(3, genero);
+		stmt.setString(4, ano_filmagem);
+		stmt.setString(5, ano_lancamento);
+		stmt.setString(6, estudio_filmagem);
+		stmt.setInt(7, id_filme);		
+		
+		stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Iterator<IFilme> listar() {
 		// TODO Auto-generated method stub
 		PreparedStatement stmt = null;
+
+		
 		try{
+
 			stmt = conexao.prepareStatement("SELECT * FROM Filme");
 			ResultSet result = stmt.executeQuery();
 			
@@ -77,6 +107,7 @@ public class FilmeDAO implements IFilmeDAO{
 				filme.setEstudioDeFilmagem("estudioDeFilmagem");
 			
 				filmes.add(filme);
+				
 			}
 			
 			Iterator<IFilme> iterator = new FilmeIterator(filmes);
@@ -89,8 +120,13 @@ public class FilmeDAO implements IFilmeDAO{
 	}
 
 	@Override
-	public void remover(int idFilme) {
-		// TODO Auto-generated method stub
+	public void remover(int idFilme) throws SQLException {
+		
+		String sql = "DELETE FROM Filme WHERE id = ?";
+		PreparedStatement stmt = conexao.prepareStatement(sql);
+		stmt.setInt(1, idFilme);
+		
+		stmt.execute();
 		
 	}
 
