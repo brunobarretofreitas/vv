@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.bruno.filme.contrato.IFilme;
@@ -26,12 +27,15 @@ public class Main extends JFrame{
 
 	private JTextField ipBanco;
 	private JButton botaoConfirmar;
+	private JTextArea filmes;
 	
 	public Main(){
 		this.setTitle("Teste");
 		this.setSize(300, 300);
 		this.setLocation(200,200);
 		this.getContentPane().setLayout(new FlowLayout());
+		filmes = new JTextArea();
+		filmes.setSize(200, 200);
 		ipBanco = new JTextField();
 		ipBanco.setPreferredSize(new Dimension(100,20));
 		botaoConfirmar = new JButton();
@@ -63,6 +67,9 @@ public class Main extends JFrame{
 		});
 		this.add(ipBanco);
 		this.add(botaoConfirmar);
+		this.add(this.filmes);
+		
+		
 		
 	}
 	
