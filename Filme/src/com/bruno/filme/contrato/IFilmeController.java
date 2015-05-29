@@ -13,6 +13,12 @@ public interface IFilmeController {
 		
 	public void removerFilme(int idFilme) throws SQLException;
 	
+	public void setAtoresDoFilme(int idFilme, Iterator<IPessoa> atores) throws SQLException;
+	
+	public Iterator<IPessoa> getAtoresDoFilme(int idFilme) throws SQLException;
+	
+	public void setDiretorDoFilme(int idFilme, IPessoa diretor) throws SQLException;
+	
 	public IFilme buscarFilmePorId(int id) throws SQLException;
 
 	public IFilme buscarFilmePorTitulo(String titulo) throws SQLException;

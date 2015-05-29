@@ -98,5 +98,29 @@ public class FilmeControlador implements IFilmeController{
 		return filmes;
 	}
 
+	@Override
+	public void setAtoresDoFilme(int idFilme, Iterator<IPessoa> atores) throws SQLException {
+		// TODO Auto-generated method stub
+		IFilme filme = this.buscarFilmePorId(idFilme);
+		if(filme!=null)
+			filme.setAtores(atores);
+	}
+
+	@Override
+	public Iterator<IPessoa> getAtoresDoFilme(int idFilme) throws SQLException {
+		// TODO Auto-generated method stub
+		IFilme filme = this.buscarFilmePorId(idFilme);
+		return filme.getAtores();
+		
+	}
+
+	@Override
+	public void setDiretorDoFilme(int idFilme, IPessoa diretor) throws SQLException {
+		// TODO Auto-generated method stub
+		IFilme filme = this.buscarFilmePorId(idFilme);
+		if(filme!=null)
+			filme.setDiretor(diretor);
+	}
+
 		
 }
